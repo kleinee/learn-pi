@@ -1,1 +1,3 @@
+a="andy"
+print(a)
 
