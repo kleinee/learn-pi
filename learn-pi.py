@@ -1,6 +1,11 @@
 import sqlite3
 import pandas as pd
-import sys
+
+#version check
+#print (pd.__version__)
+#v = sys.version[:3]
+#print(v)
+#eo version check
 
 conn = sqlite3.connect("/home/pi/data/climate.db")
 c = conn.cursor()
@@ -12,7 +17,8 @@ df = pd.read_sql_query("SELECT substr(dt,1,7) as yyyymm, "\
 						"where dt>'2000-00-00' "\
 						"group by substr(dt,1,7), Country "\
 						"order by substr(dt,1,7), Country;", conn)
-print df.head(500)
+print (df.head(20))
+df.plot.bar(yyyymm, AvgTemp)
 conn.close()
 
 # calc number rows in table
