@@ -9,16 +9,16 @@ import pandas as pd
 
 conn = sqlite3.connect("/home/pi/data/climate.db")
 c = conn.cursor()
-df = pd.read_sql_query("SELECT substr(dt,1,7) as yyyymm, "\
+df = pd.read_sql_query("SELECT substr(dt,1,4) as yyyy, "\
 						"Country as Cntry, "\
 						"avg(AverageTemperature) as AvgTemp, "\
 						"avg(AverageTemperatureUncertainty) as AvgTempUnc "\
 						"from GLOBAL_LAND_TEMP_COUNTRY "\
-						"where dt>'2000-00-00' "\
-						"group by substr(dt,1,7), Country "\
-						"order by substr(dt,1,7), Country;", conn)
+						"where dt>'2009-00-00' "\
+						"group by substr(dt,1,4), Country "\
+						"order by substr(dt,1,4), Country;", conn)
 print (df.head(20))
-df.plot.bar(yyyymm, AvgTemp)
+df.plot.bar()
 conn.close()
 
 # calc number rows in table
